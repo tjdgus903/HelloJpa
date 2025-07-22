@@ -19,24 +19,14 @@ public class JpaMain {
 
         try{
 
-            // 비영속
-            Member member = new Member();
-            member.setId(102L);
-            member.setName("HelloJPA");
+            // 영속
+            Member member = em.find(Member.class, 150L);
+            member.setName("zzzz");
 
+            // persist 는 비영속 객체를 영속상태로 만들때만 사용
+            // em.persist(member);
 
-            System.out.println("=== BEFORE ===");
-            // 영속 - entityManager를 통해 엔티티를 영속성 컨텍스트에 추가
-            em.persist(member);
-            // 영속성 컨텍스트에서 지우기
-            // em.detach(member);
-            // 객체 삭제(delete 문)
-            // em.remove(member);
-            System.out.println("=== AFTER ===");
-
-            Member findMember = em.find(Member.class, 102L);
-            System.out.println("findMember.id = "+findMember.getId());
-            System.out.println("findMember.name = "+findMember.getName());
+            System.out.println("=============");
 
             // 트랜잭션 커밋(변경사항 적용)
             tx.commit();
