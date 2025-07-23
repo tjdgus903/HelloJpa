@@ -18,7 +18,6 @@ public class JpaMain {
         tx.begin();
 
         try{
-
             // 영속
             Member member1 = em.find(Member.class,150L);
             member1.setName("AAAA");
@@ -26,17 +25,6 @@ public class JpaMain {
             em.clear();
 
             Member member2 = em.find(Member.class,150L);
-
-            // 즉시 커밋
-            // 플러시해도 쓰기 지연 sql 저장소에 있는 쿼리들을 db에 반영
-            // em.flush();
-
-            // 준영속
-            // 영속 -> 준영속 상태로 변경
-            // em.detach(member);
-
-            // 영속성 컨텍스트 모두 지우기
-            // em.clear();
 
             System.out.println("================");
             // 트랜잭션 커밋(변경사항 적용)

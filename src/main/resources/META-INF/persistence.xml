@@ -20,7 +20,8 @@
             <property name="hibernate.use_sql_comments"  value="true"/>
             <!-- 하이버네이트 버퍼 셋팅 (사이즈만큼 모아서 한방에 전달) -->
             <property name="hibernate.jdbc.batch_size" value="10"/>
-            <!--<property name="hibernate.hbm2ddl.auto" value="none" />-->
+            <!-- ddl 을 자동 처리하는 옵션으로 create: 신규 테이블 생성 / create-drop : 생성 후 삭제 / update : 컬럼을 추가 / validate : 값 확인 / none : 안씀 -->
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
     </persistence-unit>
 
