@@ -18,13 +18,13 @@ public class JpaMain {
         tx.begin();
 
         try{
-            // 영속
-            Member member1 = em.find(Member.class,150L);
-            member1.setName("AAAA");
 
-            em.clear();
+            Member member = new Member();
+            member.setId(3L);
+            member.setUsername("C");
+            member.setRoleType(RoleType.GUEST);
 
-            Member member2 = em.find(Member.class,150L);
+            em.persist(member);
 
             System.out.println("================");
             // 트랜잭션 커밋(변경사항 적용)
