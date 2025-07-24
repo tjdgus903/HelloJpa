@@ -8,21 +8,15 @@
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/jpashop"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/newdb"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <!-- 옵션 -->
-            <!-- 쿼리가 로그에 찍힘 -->
             <property name="hibernate.show_sql" value="true"/>
-            <!-- 포멧에 맞게끔 셋팅 -->
             <property name="hibernate.format_sql" value="true"/>
-            <!-- 로그 내 코멘트 -->
             <property name="hibernate.use_sql_comments"  value="true"/>
-            <!-- 하이버네이트 버퍼 셋팅 (사이즈만큼 모아서 한방에 전달) -->
             <property name="hibernate.jdbc.batch_size" value="10"/>
-            <!-- ddl 을 자동 처리하는 옵션으로 create: 신규 테이블 생성 / create-drop : 생성 후 삭제 / update : 컬럼을 추가 / validate : 값 확인 / none : 안씀 -->
             <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
-
 </persistence>
