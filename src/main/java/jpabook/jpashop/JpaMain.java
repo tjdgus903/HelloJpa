@@ -21,19 +21,29 @@ public class JpaMain {
 
         try {
 
+            // 저장
             Team team = new Team();
             team.setName("A");
             em.persist(team);
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeamId(team.getId());
+            member.setTeam(team);
             em.persist(member);
+
+            // 영속성 컨텍스트의 쿼리 sql 로 푸쉬
+            em.flush();
+            // 영속성 컨텍스트 클리어
+            em.clear();
 
             Member findMember = em.find(Member.class, member.getId());
 
-            Long findTeamId = findMember.getTeamId();
-            Team findTeam = em.find(Team.class, findTeamId);
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = "+ findTeam);
+
+            // 팀을 변경한다면
+            // Team newTeam = em.find(Team.class, 100L);
+            // findMember.setTeam(newTeam);
 
             tx.commit();
         }catch(Exception e){
