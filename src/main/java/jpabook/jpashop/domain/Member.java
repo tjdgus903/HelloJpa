@@ -13,9 +13,10 @@ public class Member {
     @Column(name="USERNAME")
     private String username;
 
-//    @Column(name="TEAM_ID")
-//    private Long teamId;
     @ManyToOne
+    // 1. JoinColumn 에서 Team 테이블의 pk 를 셋팅
+    // JoinColumn 은 관리한다는 의미(외래키가 있는 곳을 owner로 설정해야됨)
+    // 보통 1:n 관계이면 n 이 연관관계 주인이 됨
     @JoinColumn(name="TEAM_ID")
     private Team team;
 

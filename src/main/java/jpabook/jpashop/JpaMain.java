@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
 
@@ -37,13 +38,12 @@ public class JpaMain {
             em.clear();
 
             Member findMember = em.find(Member.class, member.getId());
+            // 4. 양방향 연관관계 환경 셋팅
+            List<Member> members = findMember.getTeam().getMembers();
 
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam = "+ findTeam);
-
-            // 팀을 변경한다면
-            // Team newTeam = em.find(Team.class, 100L);
-            // findMember.setTeam(newTeam);
+            for (Member m : members) {
+                System.out.println("m : "+m.getUsername());
+            }
 
             tx.commit();
         }catch(Exception e){
