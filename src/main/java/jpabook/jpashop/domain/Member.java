@@ -1,6 +1,8 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -9,16 +11,13 @@ public class Member {
     @GeneratedValue
     @Column(name="MEMBER_ID")
     private Long id;
+    private String name;
+    private String city;
+    private String street;
+    private String zipCode;
 
-    @Column(name="USERNAME")
-    private String username;
-
-    @ManyToOne
-    // 1. JoinColumn 에서 Team 테이블의 pk 를 셋팅
-    // JoinColumn 은 관리한다는 의미(외래키가 있는 곳을 owner로 설정해야됨)
-    // 보통 1:n 관계이면 n 이 연관관계 주인이 됨
-    @JoinColumn(name="TEAM_ID")
-    private Team team;
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -28,19 +27,35 @@ public class Member {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Team getTeam() {
-        return team;
+    public String getCity() {
+        return city;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }
