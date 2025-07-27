@@ -1,17 +1,11 @@
 package jpabook.jpashop;
 
-
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
-import jpabook.jpashop.domain.Team;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class JpaMain {
 
@@ -24,8 +18,11 @@ public class JpaMain {
 
         try {
 
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
+            Book book = new Book();
+            book.setName("JPA 짱고수");
+            book.setAuthor("김성현");
+
+            em.persist(book);
 
             tx.commit();
         }catch(Exception e){
@@ -34,7 +31,6 @@ public class JpaMain {
             em.close();
         }
 
-        tx.commit();
         emf.close();
     }
 }
