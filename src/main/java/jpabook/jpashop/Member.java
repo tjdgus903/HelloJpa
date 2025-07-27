@@ -15,17 +15,12 @@ public class Member extends BaseEntity{
     private Long id;
 
     @Column(name="USERNAME")
-    private String name;
+    private String username;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name="TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
-
-
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
-*/
     public Long getId() {
         return id;
     }
@@ -34,12 +29,19 @@ public class Member extends BaseEntity{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String name) {
+        this.username = name;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 }

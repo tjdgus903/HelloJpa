@@ -1,16 +1,16 @@
 package jpabook.jpashop;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import org.hibernate.Hibernate;
 
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+
 import java.time.LocalDateTime;
 
 public class JpaMain {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+
         EntityManager em = emf.createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
@@ -18,11 +18,19 @@ public class JpaMain {
 
         try {
 
-            Book book = new Book();
-            book.setName("JPA 짱고수");
-            book.setAuthor("김성현");
+            Member member1 = new Member();
+            member1.setUserName("hello");
+            em.persist(member1);
 
-            em.persist(book);
+            em.flush();
+            em.clear();
+
+            Member m1 = em.getReference(Member.class, member1.getId());
+            System.out.println("m1 : "+m1.getClass());
+            // m1.getUserName();
+            System.out.println("isLoaded = "+ emf.getPersistenceUnitUtil().isLoaded(m1));
+
+            Hibernate.initialize(m1);
 
             tx.commit();
         }catch(Exception e){
@@ -32,5 +40,18 @@ public class JpaMain {
         }
 
         emf.close();
+    }
+
+    private static void printMember(Member member) {
+        System.out.println("member = "+member);
+    }
+
+    private static void printMemberAndTeam(Member member) {
+        String username = member.getUserName();
+        System.out.println("username : "+username);
+
+        Team team = member.getTeam();
+        System.out.println("team = "+team.getName());
+
     }
 }
