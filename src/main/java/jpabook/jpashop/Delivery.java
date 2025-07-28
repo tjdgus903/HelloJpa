@@ -1,6 +1,10 @@
 package jpabook.jpashop;
 
+import net.bytebuddy.dynamic.TypeResolutionStrategy;
+
 import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 public class Delivery {
@@ -13,7 +17,7 @@ public class Delivery {
     private String zipCode;
     private DeleveryStatus status;
 
-/*    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name="delivery")
-    private Order order;*/
+    private Order order;
 }
