@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member extends BaseEntity{
+public class Member {
 
     @Id
     @GeneratedValue
@@ -17,13 +17,13 @@ public class Member extends BaseEntity{
     @Column(name="USERNAME")
     private String username;
 
+    // 기간
+    @Embedded
+    private Period workPeriod;
 
-    //@ManyToOne(fetch = FetchType.EAGER)     // 즉시 로딩(실무에서는 사용 X)
-    // 즉시로딩을 사용하면 join 해서 연관있는 테이블까지 모두 조회를 하기 때문에
-    // DB 운영에서 성능 이슈가 발생할 수 있음
-    @ManyToOne(fetch = FetchType.LAZY)   // 지연로딩
-    @JoinColumn
-    private Team team;
+    // 주소
+    @Embedded
+    private Address homeAddress;
 
     public Long getId() {
         return id;
@@ -33,19 +33,27 @@ public class Member extends BaseEntity{
         this.id = id;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUserName(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public Period getWorkPeriod() {
+        return workPeriod;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setWorkPeriod(Period vorkPeriod) {
+        this.workPeriod = vorkPeriod;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 }
