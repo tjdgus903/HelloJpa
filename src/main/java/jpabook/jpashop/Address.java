@@ -3,6 +3,9 @@ package jpabook.jpashop;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+
+// 값타입은 데이터를 객체간에 공유를 하기 때문에 불변으로 만들어야 오류가 안남
+// set 을 통해 값이 변경이 일어날 경우 다른 객체의 데이터도 변경되기 때문
 @Embeddable
 public class Address {
 
@@ -28,22 +31,22 @@ public class Address {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
 
     public String getZipCode() {
         return zipCode;
     }
 
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public void setStreet(String street) {
+        this.street = street;
+    }
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
