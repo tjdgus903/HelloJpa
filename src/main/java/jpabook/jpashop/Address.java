@@ -2,6 +2,7 @@ package jpabook.jpashop;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 
 // 값타입은 데이터를 객체간에 공유를 하기 때문에 불변으로 만들어야 오류가 안남
@@ -49,5 +50,20 @@ public class Address {
     }
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    // equals 는 직접 코딩하지말고 참조하여 쓰는걸 권장
+    // 값타입을 비교할 때에는 equals 를 써야됨!!
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(zipCode, address.zipCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, zipCode);
     }
 }
