@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class JpaMain {
 
@@ -18,19 +19,39 @@ public class JpaMain {
 
         try {
 
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
+
             Member member1 = new Member();
             member1.setUserName("hello");
+            member1.setTeam(team);
             em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUserName("hello");
+            member2.setTeam(teamB);
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            Member m1 = em.getReference(Member.class, member1.getId());
-            System.out.println("m1 : "+m1.getClass());
-            // m1.getUserName();
-            System.out.println("isLoaded = "+ emf.getPersistenceUnitUtil().isLoaded(m1));
+            List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class)
+                    .getResultList();
 
-            Hibernate.initialize(m1);
+
+/*
+            Member m = em.find(Member.class, member1.getId());
+            System.out.println("m = "+m.getTeam().getClass());
+
+            System.out.println("==================");
+            System.out.println(m.getTeam().getName());
+            System.out.println("==================");
+*/
 
             tx.commit();
         }catch(Exception e){

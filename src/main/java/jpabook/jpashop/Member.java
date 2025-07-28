@@ -17,8 +17,12 @@ public class Member extends BaseEntity{
     @Column(name="USERNAME")
     private String username;
 
-    @ManyToOne
-    @JoinColumn(name="TEAM_ID", insertable = false, updatable = false)
+
+    //@ManyToOne(fetch = FetchType.EAGER)     // 즉시 로딩(실무에서는 사용 X)
+    // 즉시로딩을 사용하면 join 해서 연관있는 테이블까지 모두 조회를 하기 때문에
+    // DB 운영에서 성능 이슈가 발생할 수 있음
+    @ManyToOne(fetch = FetchType.LAZY)   // 지연로딩
+    @JoinColumn
     private Team team;
 
     public Long getId() {
