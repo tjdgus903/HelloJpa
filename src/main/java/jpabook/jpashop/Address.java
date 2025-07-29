@@ -52,8 +52,6 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    // equals 는 직접 코딩하지말고 참조하여 쓰는걸 권장
-    // 값타입을 비교할 때에는 equals 를 써야됨!!
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
